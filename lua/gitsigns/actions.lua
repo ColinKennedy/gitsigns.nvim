@@ -1538,7 +1538,7 @@ local function _get_hunk_range(hunk)
   return {start, start + count}
 end
 
-M.move_to_first_hunk = async.void(function(opts, forwards)
+M.move_to_first_hunk = function(opts, forwards)
   async.scheduler_if_buf_valid(current_buf())
 
   local hunks = M.get_head_hunks() or {}
@@ -1552,7 +1552,7 @@ M.move_to_first_hunk = async.void(function(opts, forwards)
   local line = hunk.added.start or hunk.removed.start
 
   vim.api.nvim_win_set_cursor(0, {line, 0})
-end)
+end
 
 function M.get_head_hunks()
   local bufnr = current_buf()
